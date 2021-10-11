@@ -1,0 +1,22 @@
+completed: 21
+product CURD,
+client and server side validation
+pagination
+searching listing
+soritng asc dsc both 
+confirm on delete   
+cancel button
+validation 
+new file input
+create view page
+Make SignUp page(Make one users table in db:name,email password)
+Make all validation and make email is unique
+Login page(email & password)
+Logout button
+store pass with encryption
+logged user should not go in register page
+without login user should not redirect to product page
+accending and descending on same button
+send email verification mail with verificaton link after registration
+add confirm password in registration page
+forget password send forget pass email with link, open new page with form(pass,confirm pass)

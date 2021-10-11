@@ -1,0 +1,12 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<div id="app">
+</div>
+<button id="button">Click</button>
+<script>
+    let pages = <%-JSON.stringify(pages)%>
+    $("#button").click(function(){
+        alert(11)
+      $("#app").append(pages);
+    });
+    </script>

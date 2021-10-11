@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../../public/js/form.js"></script>
+    <!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+
+    <title>Document</title>
+</head>
+<body>
+    <%if(message){%>
+        <div class="alert alert-warning alert-dismissible fade show d-flex p-2 d-flex justify-content-center h-50 align-middle" role="alert">
+            <strong>Error!</strong> <%=message%>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    <%}%>
+    <div class="container">
+        
+        <div class="d-flex p-2 d-flex justify-content-center h-50 align-middle">
+            
+            <form action="/user/profile/<%=user.id%>" enctype="multipart/form-data"  method="POST">
+                <div class="form-group pb-3 align-items-center p-4">
+                    <label for="exampleFormControlFile1" class="mb-2"><img src="../../images/users/<%=user.image?user.image:"image.png"%>" style="max-height:75px;width:130px;border-radius: 50%;" alt="image not available" srcset=""></label><br>
+                    <input type="file" name="image" value="./fileupload/Uploads/" class="form-control-file" id="exampleFormControlFile1" required>
+                </div>
+                <div class="form-group mb-2">
+                    <label for="username">Username</label>
+                    <input type="text" class="form-control" id="username"  value="<%= user.username %>" name="username" required> 
+                </div>
+                <div class="form-group mb-2">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email" value="<%= user.email %>" name="email" required> 
+                </div>
+                <input type="submit" class="btn btn-success" value="Submit">
+                <a href="/1" class="btn btn-danger">Cancel</a>
+            </form>
+        </div>
+    </div>
+    
+</body>
+</html>
