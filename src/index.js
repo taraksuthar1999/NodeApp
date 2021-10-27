@@ -3,22 +3,12 @@ const express = require('express')
 const mysqlConnection = require("./db/mysql")
 const bodyParser = require('body-parser')
 const product = require('./routes/product')
+const category = require('./routes/category')
 const user = require('./routes/user')
 const session = require('express-session')
 const path = require('path')
 const cookie = require('cookie-parser')
 require('dotenv').config({ path: './config.env' })
-// function setMessage(message){
-//     this.message = message
-//     return this;
-// }
-// function getMessage(){
-//     if(!this.message){
-//         return false
-//     }
-//     return this.message
-// }
-
 app.use(session({
     secret: 'keyboard cat',
     resave: false,
@@ -35,7 +25,11 @@ app.get('/home',(req,res)=>{
 })
 app.use('/',product)
 app.use('/user',user)
+// app.use('/category',category)
 
+app.listen(process.env.PORT,()=>{
+    console.log('server started on '+process.env.PORT)
+})
 // app.use(function (err, req, res, next) {
 //     res.session.message = 
 //     // req.session.message = err.message
@@ -48,7 +42,3 @@ app.use('/user',user)
 //       message: `Can't find ${req.originalUrl} on this server!`
 //     });
 // });
-
-app.listen(process.env.PORT,()=>{
-    console.log('server started')
-})
