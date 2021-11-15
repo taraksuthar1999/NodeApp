@@ -6,8 +6,8 @@ sequelize
   .authenticate()
   .then(() => {
     console.log('DB Connection has been established successfully.');
-    app.listen(app.get('port'), (): void => {
-      console.log(`🌏🌏🌏🌏  Express server started at http://localhost:${app.get('port')}   🌏🌏🌏🌏`);
+    app.listen(8080, (): void => {
+      console.log(`🌏🌏🌏🌏  Express server started at http://localhost:8080}   🌏🌏🌏🌏`);
     });
   })
   .catch((err: Error) => {
