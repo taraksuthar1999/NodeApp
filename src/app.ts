@@ -1,9 +1,9 @@
-import { setUpSequelize } from './db/connection';
+import { setUpSequelize } from './db/connection'
 import express from 'express'
+import app from './index'
 const app = express();
 const sequelize = setUpSequelize();
 sequelize
-  .authenticate()
   .then(() => {
     console.log('DB Connection has been established successfully.');
     app.listen(8080, (): void => {
