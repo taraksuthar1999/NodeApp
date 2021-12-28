@@ -1,4 +1,5 @@
 import { RequestHandler } from 'express';
+import config from '../config';
 
 import logger from '../logger';
 
@@ -10,7 +11,16 @@ import logger from '../logger';
  * @param handler Request handler to check for error
  */
 const handleError = (handler: RequestHandler): RequestHandler => async (req, res, next): Promise<any> => {
-  handler(req, res, next)
+  handler(req, res, next).catch((err: Error) => {
+    if (config.isDevelopment) {
+      logger.log({
+        level: 'error',
+        message: 'Error in request handler',
+        error: err,
+      });
+    }
+    next(err);
+  });
 };
 
 export default handleError;
