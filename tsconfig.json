@@ -1,21 +1,37 @@
 {
   "compilerOptions": {
     "module": "commonjs",
-    "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "target": "es6",
-    "strict": false,
     "moduleResolution": "node",
     "sourceMap": true,
     "outDir": "dist",
-    "rootDir": "src",
-    "skipLibCheck": true
-  },
-  "lib": ["es2015"],
-  "include": [
-    "src/*"
-  ],
-  "exclude": [
-    "node_modules",
-  ]
+    "baseUrl": ".",
+    "paths": {
+      "*": ["node_modules/*"],
+      "@src/*": ["src/"]
+    },
+    "resolveJsonModule": true,
+    "types": ["node"],
+    "typeRoots": ["src/@types", "node_modules/@types"]
+  }
+  // "compilerOptions": {
+  //   "module": "commonjs",
+  //   "allowSyntheticDefaultImports": true,
+  //   "esModuleInterop": true,
+  //   "target": "es6",
+  //   "strict": false,
+  //   "moduleResolution": "node",
+  //   "sourceMap": true,
+  //   "outDir": "dist",
+  //   "rootDir": "src",
+  //   "skipLibCheck": true
+  // },
+  // "lib": ["es2015"],
+  // // "include": [
+  // //   "src/*"
+  // // ],
+  // // "exclude": [
+  // //   "node_modules",
+  // // ]
 }

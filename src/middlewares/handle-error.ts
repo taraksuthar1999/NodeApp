@@ -1,7 +1,7 @@
 import { RequestHandler } from 'express';
-import config from '../config';
 
 import logger from '../logger';
+// import config from '../config';
 
 /**
  * This router wrapper catches any error from async await
@@ -10,15 +10,15 @@ import logger from '../logger';
  *
  * @param handler Request handler to check for error
  */
-const handleError = (handler: RequestHandler): RequestHandler => async (req, res, next): Promise<any> => {
+const handleError = (handler: RequestHandler): RequestHandler => async (req, res, next): Promise<void> => {
   handler(req, res, next).catch((err: Error) => {
-    if (config.isDevelopment) {
+  //  if (config.isDevelopment) {
       logger.log({
         level: 'error',
         message: 'Error in request handler',
         error: err,
       });
-    }
+  //  }
     next(err);
   });
 };
