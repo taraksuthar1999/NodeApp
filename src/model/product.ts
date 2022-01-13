@@ -11,6 +11,8 @@ export class Product extends Model{
     public discription:string;
     public image:string;
     public status:number;
+    public createdAt?: Date;
+    public updatedAt?: Date;
 }
 Product.init(
     {
@@ -49,10 +51,18 @@ Product.init(
         allowNull: false,
         defaultValue: '1',
       },
+      createdAt: {
+        type: DataTypes.DATE,
+        allowNull: true,
+      },
+      updatedAt: {
+        type: DataTypes.DATE,
+        allowNull: true,
+      },
     },
     {
       tableName: 'product',
-      timestamps: false,
+      timestamps: true,
       sequelize: sequelizeInstance,
     },
   );

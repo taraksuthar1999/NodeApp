@@ -5,6 +5,8 @@ import { createValidator } from 'express-joi-validation';
 import { Sequelize, Op } from 'sequelize';
 import { setUpSequelize } from '../../../db/connection';
 import {Product} from '../../../model/product'
+import {Pagenation} from '../../../middlewares/pagination'
+import { Page } from '../../../utils/constants';
 import * as _ from 'lodash';
 const router = Router();
 const validator = createValidator();
@@ -12,15 +14,13 @@ const connection: Sequelize = setUpSequelize();
 //--------------------------------------------------------prodcut list--------------------------------------
 
 export const getManageProductListHandler: RequestHandler = async (req, res) => {
-    try {
-
-
-        if(!req.query.search){
-            res.redirect('/1')
-        }
-        const body = req.query
+      try {
         const Where: any = {};
-        _.set(
+        const Data:any = {}
+        let currentPage:number = 1
+        const body = req.query
+        if(!body.search){
+          _.set(
             Where,
             [Op.or],
             [
@@ -28,27 +28,30 @@ export const getManageProductListHandler: RequestHandler = async (req, res) => {
               Sequelize.where(Sequelize.col('Product.price'), { [Op.like]: `%${body.search}%` }),
               Sequelize.where(Sequelize.col('`Product`.`discription`'), { [Op.like]: `%${body.search}%` })
             ],
-          );
-          const Products = await Product.findAll({where:Where,order: [['name', 'ASC']]})
-          if(!Products){
-              return res.end('no products found')
-          }
-        //return res.json(Products)
-            return res.render("product/ej",{
-                products:Products,
-                message:'success',
-                pages:'',
-                //searchvar:searchvar,
-                title:"product",
-                //user:req.session.user
-            })
-    } catch (error) {
-      return res.status(500).send({ success: 0, error: { message: error.message } });
-    }
-  };
-
-
-
+          );   
+        }
+       
+        if(body?.page){
+          currentPage=Number(body.page)
+        }
+        let pageUri:string = `/${body?.search}?page=`;
+        const Products = await Product.findAndCountAll({where:Where,order: [['name', 'ASC']]})
+        if(!Products){
+          return res.end('no products found')
+        }
+        const Paginate = new Pagenation(Products.count,currentPage,pageUri,Page.perPage);
+        Data.pages = Paginate.links()
+        Data.products = Products.rows
+        Data.message = null
+        Data.title = 'product'
+        Data.user = req.session.user
+        Data.searchvar = ''
+        //return res.json(Data)
+        return res.render("product/home",{Data})
+      } catch (error) {
+        return res.status(500).send({ success: 0, error: { message: error.message } });
+      }
+};
 
 export const list: any = () =>
   router.get('/list', handleError(getManageProductListHandler));

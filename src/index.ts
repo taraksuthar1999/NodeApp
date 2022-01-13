@@ -10,6 +10,12 @@ import compression from 'compression'
 import { ExpressJoiError } from 'express-joi-validation';
 import  {ReE}  from './services/util.service';
 const app = express()
+
+declare module 'express-session' {
+  export interface SessionData {
+    user: { [key: string]: any };
+  }
+}
 app.use(session({
     secret:'keyboard cat',
     resave:false,

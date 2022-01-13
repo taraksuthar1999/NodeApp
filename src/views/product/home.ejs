@@ -59,17 +59,17 @@ background-image: linear-gradient(15deg, #13547a 0%, #80d0c7 100%);
           <!-- Right elements -->
           <div class="d-flex align-items-center">
             <!-- Icon -->
-            <li class="list-group"><%=user.username?user.username:''%></li>
+            <li class="list-group"><%=Data.user?user.username:''%></li>
             <li class="dropdown list-group">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="caret"></span><img
-                    src="images/users/<%=user.image?user.image:'image.png'%>"
+                    src="images/users/<%=Data.user?user.image:'image.png'%>"
                     class="rounded-circle"
                     height="50"
                     alt=""
                     loading="lazy"
                   /></a>
                  <ul class="dropdown-menu" role="menu">
-                    <li><a class="btn" href="/user/profile/<%=user.id%>">Edit Profile</a></li>
+                    <li><a class="btn" href="/user/profile/<%=Data.user?Data.user.id:''%>">Edit Profile</a></li>
                     <li><a class="btn" href="/user/changePassword">Change Password</a></li>
                     <li><a class="btn" href="../user/logout">Logout</a></li>
                  </ul>
@@ -92,24 +92,24 @@ background-image: linear-gradient(15deg, #13547a 0%, #80d0c7 100%);
                 </div>
         </div>
     </nav> -->
-    <%if(message.text){%>
+    <%if(Data.message){%>
         
         <div class="alert alert-<%=message.type%> alert-dismissible fade show d-flex p-2 d-flex justify-content-center h-50 align-middle" role="alert">
-            <strong><%=message.text?message.text:''%></strong>
+            <strong><%=Data.message.text?Data.message.text:''%></strong>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
         </div>
     <%}%>
     <div class="container m-5 p-5">
-    <h1><%= title %></h1><br>
+    <h1><%= Data.title %></h1><br>
     <a href="/add/0 " class="btn btn-primary">Add Product</a><br>
     
     <table class="table table-hover w-100" id="listingTable">
         <thead>
             <tr>
                 <form action="/" method="GET">
-                    <th><input type="text" name="search" value="<%=searchvar%>"></th>
+                    <th><input type="text" name="search" value="<%=Data.searchvar%>"></th>
                     <th><button type="submit" colspan="4" class="btn btn-success">Search</button></th>
                     <th><a href="/1" colspan="4" class="btn btn-success">Reset</a></th>
                 </form>
@@ -135,7 +135,7 @@ background-image: linear-gradient(15deg, #13547a 0%, #80d0c7 100%);
     <div id="app">
     </div>
     <script>
-        let products=<%-JSON.stringify(products)%>     
+        let products=<%-JSON.stringify(Data.products)%>     
         function changePage(page)
         {        
             $("#listingTable").find("tbody").html("");
@@ -155,7 +155,7 @@ background-image: linear-gradient(15deg, #13547a 0%, #80d0c7 100%);
     </script>
 <script>
 
-    let pages = <%-JSON.stringify(pages)%>
+    let pages = <%-JSON.stringify(Data.pages)%>
     if(pages){
     $("#app").append(pages);
     }
