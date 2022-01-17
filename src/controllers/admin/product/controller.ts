@@ -19,7 +19,7 @@ export const getManageProductListHandler: RequestHandler = async (req, res) => {
         const Data:any = {}
         let currentPage:number = 1
         const body = req.query
-        if(!body.search){
+        if(body.search){
           _.set(
             Where,
             [Op.or],
@@ -53,5 +53,27 @@ export const getManageProductListHandler: RequestHandler = async (req, res) => {
       }
 };
 
+//-------------------------------------add product-------------------------------------------
+export const getProductAddHandler: RequestHandler = async (req, res) => {
+  try {
+    let message = null
+        if(req.session.message){
+            message = req.session.message
+            req.session.message=null
+        }
+    return res.render('product/form',{
+      product:[{id:0}],
+      message:message,
+      title:'product',
+      user:req.session.user
+  })
+  } catch (error) {
+    return res.status(500).send({ success: 0, error: { message: error.message } });
+  }
+};
+
 export const list: any = () =>
   router.get('/list', handleError(getManageProductListHandler));
+export const add: any = () =>
+  router.get('/add', handleError(getProductAddHandler));
+

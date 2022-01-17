@@ -1,11 +1,12 @@
 import { Router } from 'express';
 import {
-  list,
+  list,add
 } from './controller';
 
 const router = Router();
 
 export const product: any = () =>
   router.use([
-    list()
+    list(),
+    add()
   ]);
