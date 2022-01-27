@@ -6,6 +6,7 @@ import routes from './routes'
 import cookie from 'cookie-parser'
 import cors from 'cors'
 import compression from 'compression'
+import dotenv from 'dotenv'
 // import { NotFoundError } from './errors/index';
 import { ExpressJoiError } from 'express-joi-validation';
 import  {ReE}  from './services/util.service';
@@ -13,9 +14,12 @@ const app = express()
 
 declare module 'express-session' {
   export interface SessionData {
-    user: { [key: string]: any };
+    user: any;
+    message:any
   }
 }
+dotenv.config();
+console.log(process.env.PORT)
 app.use(session({
     secret:'keyboard cat',
     resave:false,
