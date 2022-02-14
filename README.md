@@ -1,4 +1,5 @@
 # NodeApp
+<<<<<<< HEAD
 <div id="top"></div>
 <!--
 *** Thanks for checking out the Best-README-Template. If you have a suggestion
@@ -247,3 +248,6 @@ Use this space to list resources you find helpful and would like to give credit 
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/othneildrew
 [product-screenshot]: images/screenshot.png
+=======
+Express.js curd application with user and product modules.
+>>>>>>> 7d3e30868a1053661ad96d556842d0de42b77345
