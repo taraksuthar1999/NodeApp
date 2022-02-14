@@ -1,16 +1,5 @@
 const nodemailer = require("nodemailer");
 const con = require("../db/mysql");
-const messageObj = require('../model/message')
-function setMessage(message){
-    this.message = new messageObj(message.type,message.text)
-    return this
-}
-function getMessage(){
-    if(!this.message){
-        return new messageObj()
-    }
-    return this.message
-}
 
 // async..await is not allowed in global scope, must use a wrapper
 module.exports.main = async(req,res,next)=>{
