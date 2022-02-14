@@ -103,15 +103,15 @@ background-image: linear-gradient(15deg, #13547a 0%, #80d0c7 100%);
     <%}%>
     <div class="container m-5 p-5">
     <h1><%= Data.title %></h1><br>
-    <a href="/add/0 " class="btn btn-primary">Add Product</a><br>
+    <a href="/admin/product/form" class="btn btn-primary">Add Product</a><br>
     
     <table class="table table-hover w-100" id="listingTable">
         <thead>
             <tr>
-                <form action="/" method="GET">
+                <form action="/admin/product/list" method="GET">
                     <th><input type="text" name="search" value="<%=Data.searchvar%>"></th>
                     <th><button type="submit" colspan="4" class="btn btn-success">Search</button></th>
-                    <th><a href="/1" colspan="4" class="btn btn-success">Reset</a></th>
+                    <th><a href="/admin/product/list" colspan="4" class="btn btn-success">Reset</a></th>
                 </form>
             </tr>
             <tr>

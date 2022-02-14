@@ -9,11 +9,13 @@ import compression from 'compression'
 // import { NotFoundError } from './errors/index';
 import { ExpressJoiError } from 'express-joi-validation';
 import  {ReE}  from './services/util.service';
+import { User } from './model/user'
 const app = express()
 
 declare module 'express-session' {
   export interface SessionData {
-    user: { [key: string]: any };
+    user: User;
+    message:any;
   }
 }
 app.use(session({

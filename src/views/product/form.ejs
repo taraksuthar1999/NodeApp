@@ -47,11 +47,12 @@
           <!-- Collapsible wrapper -->
       
           <!-- Right elements -->
+          <%if(user){%>
           <div class="d-flex align-items-center">
             <!-- Icon -->
             <li class="dropdown list-group">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="caret"></span><img
-                    src="images/users/<%=user.image?user.image:'image.png'%>"
+                    src="images/users/<%=user&&user.image?user.image:'image.png'%>"
                     class="rounded-circle"
                     height="50"
                     alt=""
@@ -66,6 +67,7 @@
       
            
           </div>
+          <%}%>
           <!-- Right elements -->
         </div>
         <!-- Container wrapper -->

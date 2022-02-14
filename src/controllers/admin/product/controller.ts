@@ -7,10 +7,13 @@ import { setUpSequelize } from '../../../db/connection';
 import {Product} from '../../../model/product'
 import {Pagenation} from '../../../middlewares/pagination'
 import { Page } from '../../../utils/constants';
+import {message} from '../../../model/message'
 import * as _ from 'lodash';
+import { lutimes } from 'fs';
 const router = Router();
 const validator = createValidator();
 const connection: Sequelize = setUpSequelize();
+
 //--------------------------------------------------------prodcut list--------------------------------------
 
 export const getManageProductListHandler: RequestHandler = async (req, res) => {
@@ -34,14 +37,18 @@ export const getManageProductListHandler: RequestHandler = async (req, res) => {
         if(body?.page){
           currentPage=Number(body.page)
         }
-        let pageUri:string = `/${body?.search}?page=`;
-        const Products = await Product.findAndCountAll({where:Where,order: [['name', 'ASC']]})
+        console.log(body.page)
+        let pageUri:string = `${body?.search?body.search:''}?page=`;
+        const Products = await Product.findAndCountAll({where:Where,order: [['id', 'ASC']]})
         if(!Products){
           return res.end('no products found')
         }
         const Paginate = new Pagenation(Products.count,currentPage,pageUri,Page.perPage);
+        console.log(Paginate.offset)
+        const ProductData = await Product.findAndCountAll({where:Where,offset:Paginate.offset,limit:Paginate.perPage,order: [['id', 'ASC']]})
+
         Data.pages = Paginate.links()
-        Data.products = Products.rows
+        Data.products = ProductData.rows
         Data.message = null
         Data.title = 'product'
         Data.user = req.session.user
@@ -54,7 +61,7 @@ export const getManageProductListHandler: RequestHandler = async (req, res) => {
 };
 
 //-------------------------------------add product-------------------------------------------
-export const getProductAddHandler: RequestHandler = async (req, res) => {
+export const getProductFormHandler: RequestHandler = async (req, res) => {
   try {
     let message = null
         if(req.session.message){
@@ -72,8 +79,18 @@ export const getProductAddHandler: RequestHandler = async (req, res) => {
   }
 };
 
+export const getProductAddHandler: RequestHandler = async (req, res) => {
+  try {
+    
+  } catch (error) {
+    return res.status(500).send({ success: 0, error: { message: error.message } });
+  }
+};
+
 export const list: any = () =>
   router.get('/list', handleError(getManageProductListHandler));
+export const form: any = () =>
+  router.get('/form', handleError(getProductFormHandler));
 export const add: any = () =>
-  router.get('/add', handleError(getProductAddHandler));
+  router.post('/add', handleError(getProductAddHandler));
 

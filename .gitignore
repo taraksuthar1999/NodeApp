@@ -1,3 +1,6 @@
 node_modules
 src/config.env
-src/.env
+.env
+src/route
+src/middleware
+src/indexx.js

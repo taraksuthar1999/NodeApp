@@ -1,13 +1,13 @@
 import { Router } from 'express';
 import {
-  list,form,add
+  loginForm,
+  registerForm
 } from './controller';
 
 const router = Router();
 
-export const product: any = () =>
+export const user: any = () =>
   router.use([
-    list(),
-    form(),
-    add()
+    loginForm(),
+    registerForm()
   ]);
